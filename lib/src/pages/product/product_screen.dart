@@ -3,6 +3,8 @@ import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
+import '../common_widgets/quantity_widget.dart';
+
 class ProductScreen extends StatelessWidget {
   final ItemModel item;
   final UtilServices utilServices = UtilServices();
@@ -60,11 +62,7 @@ class ProductScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Container(
-                              height: 30,
-                              width: 70,
-                              color: Colors.red,
-                            ),
+                            QuantityWidget(),
                           ],
                         ),
 
