@@ -108,6 +108,10 @@ List<OrderModel> orders = [
         item: apple,
         quantity: 2,
       ),
+      CartItemModel(
+        item: mango,
+        quantity: 2,
+      ),
     ],
     status: 'pending_payment',
     copyAndPaste: 'oascinaopqo65612',
