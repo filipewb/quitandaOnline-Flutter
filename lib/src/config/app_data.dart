@@ -102,8 +102,8 @@ List<OrderModel> orders = [
   // Pedido 1
   OrderModel(
     id: '541561',
-    createDateTime: DateTime.parse('2021-06-08 10:00:10.458'),
-    overdueDateTime: DateTime.parse('2021-06-08 11:00:10.458'),
+    createDateTime: DateTime.parse('2023-06-08 10:00:10.458'),
+    overdueDateTime: DateTime.parse('2023-06-08 11:00:10.458'),
     items: [
       CartItemModel(
         item: apple,
@@ -122,15 +122,15 @@ List<OrderModel> orders = [
   // Pedido 2
   OrderModel(
     id: '9191918',
-    createDateTime: DateTime.parse('2021-06-08 12:00:10.458'),
-    overdueDateTime: DateTime.parse('2021-06-08 13:00:10.458'),
+    createDateTime: DateTime.parse('2023-06-08 12:00:10.458'),
+    overdueDateTime: DateTime.parse('2023-06-08 13:00:10.458'),
     items: [
       CartItemModel(
         item: guava,
         quantity: 1,
       ),
     ],
-    status: 'refunded',
+    status: 'delivered',
     copyAndPaste: 'ascas561cas651c',
     total: 11.5,
   ),
