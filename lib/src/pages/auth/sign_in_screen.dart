@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +11,10 @@ class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
+
+  // Controlador de campos
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -78,19 +80,20 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       // Email
                       CustomTextField(
+                        controller: emailController,
                         icon: Icons.email,
                         label: 'Email',
                         validator: (email) {
                           if (email == null) return 'Digite seu e-mail';
                           if (email.isEmpty) return 'Digite seu e-mail';
                           if (!email.isEmail) return 'Digite um e-mail válido.';
-
                           return null;
                         },
                       ),
 
                       // enha
                       CustomTextField(
+                        controller: passwordController,
                         icon: Icons.lock,
                         label: 'Senha',
                         isSecret: true,
@@ -102,7 +105,6 @@ class SignInScreen extends StatelessWidget {
                           if (password.length < 7) {
                             return 'Digite uma senha com pelo menos 7 caracteres.';
                           }
-
                           return null;
                         },
                       ),
@@ -118,7 +120,10 @@ class SignInScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              print('Todos os campos estão válidos!');
+                              String email = emailController.text;
+                              String password = passwordController.text;
+
+                              print('Email: $email - Senha: $password');
                             } else {
                               print('Campos Inválidos.');
                             }
