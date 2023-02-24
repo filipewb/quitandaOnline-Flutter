@@ -101,7 +101,7 @@ class SignInScreen extends StatelessWidget {
                         validator: (password) {
                           if (password == null) return 'Digite sua senha.';
                           if (password.isEmpty) {
-                            return 'Campo Vazio, digite sua senha.';
+                            return 'Campo vazio, digite sua senha.';
                           }
                           if (password.length < 7) {
                             return 'Digite uma senha com pelo menos 7 caracteres.';
