@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/cart_item_model.dart';
-import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
+import 'package:greengrocer/src/pages/cart/view/components/cart_tile.dart';
 import 'package:greengrocer/src/pages/common_widgets/payment_dialog.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
@@ -17,22 +17,23 @@ class _CartTabState extends State<CartTab> {
   final UtilServices utilServices = UtilServices();
 
   void removeItemFromCart(CartItemModel cartItem) {
-    setState(() {
-      appData.cartItems.remove(cartItem);
+    // setState(() {
+    //   appData.cartItems.remove(cartItem);
 
-      utilServices.showToast(
-        message: 'Produto ${cartItem.item.itemName} removido(a) do carrinho.',
-      );
-    });
+    //   utilServices.showToast(
+    //     message: 'Produto ${cartItem.item.itemName} removido(a) do carrinho.',
+    //   );
+    // });
   }
 
   double cartTotalPrice() {
-    double total = 0;
-    for (var item in appData.cartItems) {
-      total += item.totalPrice();
-    }
+    // double total = 0;
+    // for (var item in appData.cartItems) {
+    //   total += item.totalPrice();
+    // }
 
-    return total;
+    // return total;
+    return 0;
   }
 
   @override
@@ -45,12 +46,13 @@ class _CartTabState extends State<CartTab> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: appData.cartItems.length,
+              itemCount: 0,
               itemBuilder: (_, index) {
-                return CartTile(
-                  cartItem: appData.cartItems[index],
-                  remove: removeItemFromCart,
-                );
+                return Container();
+                // return CartTile(
+                //   cartItem: appData.cartItems[index],
+                //   remove: removeItemFromCart,
+                // );
               },
             ),
           ),

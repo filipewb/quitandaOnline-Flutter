@@ -75,20 +75,20 @@ List<String> categories = [
   'Cereais',
 ];
 
-List<CartItemModel> cartItems = [
-  CartItemModel(
-    item: apple,
-    quantity: 1,
-  ),
-  CartItemModel(
-    item: mango,
-    quantity: 1,
-  ),
-  CartItemModel(
-    item: guava,
-    quantity: 3,
-  ),
-];
+// List<CartItemModel> cartItems = [
+//   CartItemModel(
+//     item: apple,
+//     quantity: 1,
+//   ),
+//   CartItemModel(
+//     item: mango,
+//     quantity: 1,
+//   ),
+//   CartItemModel(
+//     item: guava,
+//     quantity: 3,
+//   ),
+// ];
 
 UserModel user = UserModel(
   name: 'Filipe Wolf Boeck',
@@ -105,14 +105,14 @@ List<OrderModel> orders = [
     createDateTime: DateTime.parse('2023-06-08 10:00:10.458'),
     overdueDateTime: DateTime.parse('2023-06-08 11:00:10.458'),
     items: [
-      CartItemModel(
-        item: apple,
-        quantity: 2,
-      ),
-      CartItemModel(
-        item: mango,
-        quantity: 2,
-      ),
+      // CartItemModel(
+      //   item: apple,
+      //   quantity: 2,
+      // ),
+      // CartItemModel(
+      //   item: mango,
+      //   quantity: 2,
+      // ),
     ],
     status: 'pending_payment',
     copyAndPaste: 'oascinaopqo65612',
@@ -125,10 +125,10 @@ List<OrderModel> orders = [
     createDateTime: DateTime.parse('2023-06-08 12:00:10.458'),
     overdueDateTime: DateTime.parse('2023-06-08 13:00:10.458'),
     items: [
-      CartItemModel(
-        item: guava,
-        quantity: 1,
-      ),
+      // CartItemModel(
+      //   item: guava,
+      //   quantity: 1,
+      // ),
     ],
     status: 'delivered',
     copyAndPaste: 'ascas561cas651c',

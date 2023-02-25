@@ -7,4 +7,5 @@ abstract class EndPoint {
   static const String resetPassword = '$baseUrl/reset-password';
   static const String getAllCategories = '$baseUrl/get-category-list';
   static const String getAllProducts = '$baseUrl/get-product-list';
+  static const String getCartItems = '$baseUrl/get-cart-items';
 }
