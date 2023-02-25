@@ -38,8 +38,6 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     super.initState();
 
-    Get.find<HomeController>().printExample();
-
     Future.delayed(
       const Duration(seconds: 3),
       () {
