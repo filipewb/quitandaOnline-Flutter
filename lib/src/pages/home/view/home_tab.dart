@@ -7,7 +7,7 @@ import 'package:greengrocer/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:greengrocer/src/pages/home/controller/home_controller.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
-import '../common_widgets/app_name_widget.dart';
+import '../../common_widgets/app_name_widget.dart';
 import 'components/category_tile.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 
