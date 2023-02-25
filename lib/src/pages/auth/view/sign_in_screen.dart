@@ -6,6 +6,7 @@ import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 import 'package:greengrocer/src/pages/auth/view/components/forgot_password_dialog.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 import 'package:greengrocer/src/pages_routes/app_pages.dart';
+import 'package:greengrocer/src/services/utils_services.dart';
 import 'package:greengrocer/src/services/validators.dart';
 
 import '../../common_widgets/custom_text_field.dart';
@@ -18,6 +19,8 @@ class SignInScreen extends StatelessWidget {
   // Controlador de campos
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  final utilsServices = UtilServices();
 
   @override
   Widget build(BuildContext context) {
@@ -141,8 +144,8 @@ class SignInScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {
-                            showDialog(
+                          onPressed: () async {
+                            final bool? result = await showDialog(
                               context: context,
                               builder: (_) {
                                 return ForgotPasswordDialog(
@@ -150,6 +153,13 @@ class SignInScreen extends StatelessWidget {
                                 );
                               },
                             );
+
+                            if (result ?? false) {
+                              utilsServices.showToast(
+                                message:
+                                    'Um link de recuperação foi enviado para o seu e-mail.',
+                              );
+                            }
                           },
                           child: Text(
                             'Esqueceu a senha?',
