@@ -15,7 +15,7 @@ class UtilServices {
 
   // Recupera dado salvo localmente em seguranca
   Future<String?> getLocalData({required String key}) async {
-    await storage.read(key: key);
+    return await storage.read(key: key);
   }
 
   // Remove dado salvo localmente
