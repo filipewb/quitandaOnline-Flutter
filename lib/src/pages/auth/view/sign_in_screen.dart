@@ -92,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                         validator: emailValidator,
                       ),
 
-                      // enha
+                      // Senha
                       CustomTextField(
                         controller: passwordController,
                         icon: Icons.lock,
