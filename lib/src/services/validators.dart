@@ -1,20 +1,24 @@
 import 'package:get/get.dart';
 
 String? emailValidator(String? email) {
-  if (email == null) return 'Digite seu e-mail.';
-  if (email.isEmpty) return 'Digite seu e-mail.';
-  if (!email.isEmail) return 'Digite um e-mail válido.';
+  if (email == null || email.isEmpty) {
+    return 'Digite seu email!';
+  }
+
+  if (!email.isEmail) return 'Digite um email válido!';
+
   return null;
 }
 
-String? passwordValidator(String? password) {
-  if (password == null) return 'Digite sua senha.';
-  if (password.isEmpty) {
-    return 'Campo vazio, digite sua senha.';
+String? passwordValidator(password) {
+  if (password == null || password.isEmpty) {
+    return 'Digite sua senha!';
   }
+
   if (password.length < 7) {
-    return 'Digite uma senha com pelo menos 7 caracteres.';
+    return 'Digite uma senha com pelos menos 7 caracteres.';
   }
+
   return null;
 }
 
@@ -32,7 +36,7 @@ String? nameValidator(String? name) {
 
 String? phoneValidator(String? phone) {
   if (phone == null || phone.isEmpty) {
-    return 'Digite um número de celular!';
+    return 'Digite um celular!';
   }
 
   if (phone.length < 14 || !phone.isPhoneNumber) {
@@ -42,7 +46,7 @@ String? phoneValidator(String? phone) {
   return null;
 }
 
-String? cpfValidator(String? cpf) {
+String? cpfvalidator(String? cpf) {
   if (cpf == null || cpf.isEmpty) {
     return 'Digite um CPF!';
   }

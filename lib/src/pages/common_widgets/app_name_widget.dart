@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../config/custom_colors.dart';
+import 'package:greengrocer/src/config/custom_colors.dart';
 
 class AppNameWidget extends StatelessWidget {
   final Color? greenTitleColor;
   final double textSize;
 
   const AppNameWidget({
-    super.key,
+    Key? key,
     this.greenTitleColor,
     this.textSize = 30,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

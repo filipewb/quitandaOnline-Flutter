@@ -23,9 +23,9 @@ class CustomTextField extends StatefulWidget {
     this.initialValue,
     this.readOnly = false,
     this.validator,
+    this.onSaved,
     this.controller,
     this.textInputType,
-    this.onSaved,
     this.formFieldKey,
   }) : super(key: key);
 
@@ -39,6 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void initState() {
     super.initState();
+
     isObscure = widget.isSecret;
   }
 
@@ -49,13 +50,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextFormField(
         key: widget.formFieldKey,
         controller: widget.controller,
-        validator: widget.validator,
-        onSaved: widget.onSaved,
-        keyboardType: widget.textInputType,
         readOnly: widget.readOnly,
         initialValue: widget.initialValue,
         inputFormatters: widget.inputFormatters,
         obscureText: isObscure,
+        validator: widget.validator,
+        onSaved: widget.onSaved,
+        keyboardType: widget.textInputType,
         decoration: InputDecoration(
           prefixIcon: Icon(widget.icon),
           suffixIcon: widget.isSecret

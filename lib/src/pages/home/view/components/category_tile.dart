@@ -3,11 +3,11 @@ import 'package:greengrocer/src/config/custom_colors.dart';
 
 class CategoryTile extends StatelessWidget {
   const CategoryTile({
-    super.key,
+    Key? key,
     required this.category,
     required this.isSelected,
     required this.onPressed,
-  });
+  }) : super(key: key);
 
   final String category;
   final bool isSelected;
@@ -21,10 +21,7 @@ class CategoryTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         onTap: onPressed,
         child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 6,
-            vertical: 3,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: isSelected

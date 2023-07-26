@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/item_model.dart';
-import 'package:greengrocer/src/pages/product/product_screen.dart';
+import 'package:greengrocer/src/pages/cart/controller/cart_controller.dart';
+import 'package:greengrocer/src/pages_routes/app_pages.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class ItemTile extends StatefulWidget {
@@ -9,10 +11,10 @@ class ItemTile extends StatefulWidget {
   final void Function(GlobalKey) cartAnimationMethod;
 
   const ItemTile({
-    super.key,
+    Key? key,
     required this.item,
     required this.cartAnimationMethod,
-  });
+  }) : super(key: key);
 
   @override
   State<ItemTile> createState() => _ItemTileState();
@@ -21,15 +23,14 @@ class ItemTile extends StatefulWidget {
 class _ItemTileState extends State<ItemTile> {
   final GlobalKey imageGk = GlobalKey();
 
-  UtilServices utilServices = UtilServices();
+  final UtilsServices utilsServices = UtilsServices();
+  final cartController = Get.find<CartController>();
 
   IconData tileIcon = Icons.add_shopping_cart_outlined;
 
   Future<void> switchIcon() async {
     setState(() => tileIcon = Icons.check);
-
-    await Future.delayed(const Duration(microseconds: 2000));
-
+    await Future.delayed(const Duration(milliseconds: 1500));
     setState(() => tileIcon = Icons.add_shopping_cart_outlined);
   }
 
@@ -37,18 +38,10 @@ class _ItemTileState extends State<ItemTile> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Conteudo
+        // Conteúdo
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (c) {
-                  return ProductScreen(
-                    item: widget.item,
-                  );
-                },
-              ),
-            );
+            Get.toNamed(PagesRoutes.productRoute, arguments: widget.item);
           },
           child: Card(
             elevation: 1,
@@ -81,11 +74,11 @@ class _ItemTileState extends State<ItemTile> {
                     ),
                   ),
 
-                  // Preço - Unidade de medida
+                  // Preço - Unidade
                   Row(
                     children: [
                       Text(
-                        utilServices.priceToCurrency(widget.item.price),
+                        utilsServices.priceToCurrency(widget.item.price),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -99,16 +92,16 @@ class _ItemTileState extends State<ItemTile> {
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
           ),
         ),
 
-        // Botao add ao carrinho
+        // Botão add carrinho
         Positioned(
           top: 4,
           right: 4,
@@ -121,6 +114,9 @@ class _ItemTileState extends State<ItemTile> {
               child: InkWell(
                 onTap: () {
                   switchIcon();
+
+                  cartController.addItemToCart(item: widget.item);
+
                   widget.cartAnimationMethod(imageGk);
                 },
                 child: Ink(
@@ -138,7 +134,7 @@ class _ItemTileState extends State<ItemTile> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greengrocer/src/pages/base/controller/navigation_controller.dart';
+import 'package:greengrocer/src/pages/cart/view/cart_tab.dart';
 import 'package:greengrocer/src/pages/home/view/home_tab.dart';
-
-import '../cart/view/cart_tab.dart';
-import '../orders/orders_tab.dart';
-import '../profile/profile_tab.dart';
+import 'package:greengrocer/src/pages/orders/view/orders_tab.dart';
+import 'package:greengrocer/src/pages/profile/profile_tab.dart';
 
 class BaseScreen extends StatefulWidget {
-  const BaseScreen({super.key});
+  const BaseScreen({Key? key}) : super(key: key);
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-  final navigatioController = Get.find<NavigationController>();
+  final navigationController = Get.find<NavigationController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: navigatioController.pageController,
+        controller: navigationController.pageController,
         children: const [
           HomeTab(),
           CartTab(),
@@ -31,9 +30,9 @@ class _BaseScreenState extends State<BaseScreen> {
         ],
       ),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
-            currentIndex: navigatioController.currentIndex,
+            currentIndex: navigationController.currentIndex,
             onTap: (index) {
-              navigatioController.navigatePageView(index);
+              navigationController.navigatePageView(index);
             },
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.green,
@@ -54,7 +53,7 @@ class _BaseScreenState extends State<BaseScreen> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
-                label: 'Perfil',
+                label: 'perfil',
               ),
             ],
           )),

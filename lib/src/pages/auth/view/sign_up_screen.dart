@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 import 'package:greengrocer/src/pages/common_widgets/custom_text_field.dart';
-import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/services/validators.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+  SignUpScreen({Key? key}) : super(key: key);
 
   final cpfFormatter = MaskTextInputFormatter(
     mask: '###.###.###-##',
@@ -15,7 +15,7 @@ class SignUpScreen extends StatelessWidget {
   );
 
   final phoneFormatter = MaskTextInputFormatter(
-    mask: '(##) #####-####',
+    mask: '## # ####-####',
     filter: {'#': RegExp(r'[0-9]')},
   );
 
@@ -48,7 +48,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Formulário
+                  // Formulario
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
@@ -68,48 +68,48 @@ class SignUpScreen extends StatelessWidget {
                           CustomTextField(
                             icon: Icons.email,
                             label: 'Email',
-                            textInputType: TextInputType.emailAddress,
-                            validator: emailValidator,
                             onSaved: (value) {
                               authController.user.email = value;
                             },
+                            validator: emailValidator,
+                            textInputType: TextInputType.emailAddress,
                           ),
                           CustomTextField(
                             icon: Icons.lock,
                             label: 'Senha',
-                            isSecret: true,
-                            validator: passwordValidator,
                             onSaved: (value) {
                               authController.user.password = value;
                             },
+                            validator: passwordValidator,
+                            isSecret: true,
                           ),
                           CustomTextField(
                             icon: Icons.person,
                             label: 'Nome',
-                            validator: nameValidator,
                             onSaved: (value) {
                               authController.user.name = value;
                             },
+                            validator: nameValidator,
                           ),
                           CustomTextField(
                             icon: Icons.phone,
                             label: 'Celular',
-                            inputFormatters: [phoneFormatter],
-                            textInputType: TextInputType.phone,
                             validator: phoneValidator,
                             onSaved: (value) {
                               authController.user.phone = value;
                             },
+                            textInputType: TextInputType.phone,
+                            inputFormatters: [phoneFormatter],
                           ),
                           CustomTextField(
                             icon: Icons.file_copy,
                             label: 'CPF',
-                            inputFormatters: [cpfFormatter],
-                            textInputType: TextInputType.number,
-                            validator: cpfValidator,
+                            validator: cpfvalidator,
                             onSaved: (value) {
                               authController.user.cpf = value;
                             },
+                            textInputType: TextInputType.number,
+                            inputFormatters: [cpfFormatter],
                           ),
                           SizedBox(
                             height: 50,
@@ -148,8 +148,6 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
-              //Botao de voltar
               Positioned(
                 top: 10,
                 left: 10,

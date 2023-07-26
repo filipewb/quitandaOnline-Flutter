@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:greengrocer/src/constants/storage_keys.dart';
 import 'package:greengrocer/src/models/user_model.dart';
-import 'package:greengrocer/src/pages/auth/repository/auth_repository.dart';
+import 'package:greengrocer/src/pages/auth/respository/auth_respository.dart';
 import 'package:greengrocer/src/pages/auth/result/auth_result.dart';
 import 'package:greengrocer/src/pages_routes/app_pages.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
@@ -10,7 +10,7 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
 
   final authRepository = AuthRepository();
-  final utilServices = UtilServices();
+  final utilsServices = UtilsServices();
 
   UserModel user = UserModel();
 
@@ -22,8 +22,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> validateToken() async {
-    // Recuperar o token que foi salvo localmente
-    String? token = await utilServices.getLocalData(key: StorageKeys.token);
+    String? token = await utilsServices.getLocalData(key: StorageKeys.token);
 
     if (token == null) {
       Get.offAllNamed(PagesRoutes.signInRoute);
@@ -35,12 +34,42 @@ class AuthController extends GetxController {
     result.when(
       success: (user) {
         this.user = user;
+
         saveTokenAndProceedToBase();
       },
       error: (message) {
         signOut();
       },
     );
+  }
+
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    isLoading.value = true;
+
+    final result = await authRepository.changePassword(
+      email: user.email!,
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      token: user.token!,
+    );
+
+    isLoading.value = false;
+
+    if (result) {
+      utilsServices.showToast(
+        message: 'A senha foi atualizada com sucesso!',
+      );
+
+      signOut();
+    } else {
+      utilsServices.showToast(
+        message: 'A senha atual está incorreta',
+        isError: true,
+      );
+    }
   }
 
   Future<void> resetPassword(String email) async {
@@ -52,15 +81,15 @@ class AuthController extends GetxController {
     user = UserModel();
 
     // Remover o token localmente
-    await utilServices.removeLocalData(key: StorageKeys.token);
+    await utilsServices.removeLocalData(key: StorageKeys.token);
 
-    // Ir para login
+    // Ir para o login
     Get.offAllNamed(PagesRoutes.signInRoute);
   }
 
   void saveTokenAndProceedToBase() {
     // Salvar o token
-    utilServices.saveLocalData(key: StorageKeys.token, data: user.token!);
+    utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
 
     // Ir para a base
     Get.offAllNamed(PagesRoutes.baseRoute);
@@ -76,10 +105,11 @@ class AuthController extends GetxController {
     result.when(
       success: (user) {
         this.user = user;
+
         saveTokenAndProceedToBase();
       },
       error: (message) {
-        utilServices.showToast(
+        utilsServices.showToast(
           message: message,
           isError: true,
         );
@@ -105,7 +135,7 @@ class AuthController extends GetxController {
         saveTokenAndProceedToBase();
       },
       error: (message) {
-        utilServices.showToast(
+        utilsServices.showToast(
           message: message,
           isError: true,
         );

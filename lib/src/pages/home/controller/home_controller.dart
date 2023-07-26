@@ -8,8 +8,8 @@ import 'package:greengrocer/src/services/utils_services.dart';
 const int itemsPerPage = 6;
 
 class HomeController extends GetxController {
-  final homeRepository = HomeRepository();
-  final utilsServices = UtilServices();
+  final homeRespository = HomeRespository();
+  final utilsServices = UtilsServices();
 
   bool isCategoryLoading = false;
   bool isProductLoading = true;
@@ -59,7 +59,7 @@ class HomeController extends GetxController {
     setLoading(true);
 
     HomeResult<CategoryModel> homeResult =
-        await homeRepository.getAllCategories();
+        await homeRespository.getAllCategories();
 
     setLoading(false);
 
@@ -81,7 +81,7 @@ class HomeController extends GetxController {
   }
 
   void filterByTitle() {
-    // Apaga todos os produtos nas categorias
+    // Apagar todos os produtos das categorias
     for (var category in allCategories) {
       category.items.clear();
       category.pagination = 0;
@@ -93,7 +93,7 @@ class HomeController extends GetxController {
       CategoryModel? c = allCategories.firstWhereOrNull((cat) => cat.id == '');
 
       if (c == null) {
-        // Cria uma categoria generalizada
+        // Criar uma nova categoria com todos
         final allProductsCategory = CategoryModel(
           title: 'Todos',
           id: '',
@@ -129,7 +129,7 @@ class HomeController extends GetxController {
     Map<String, dynamic> body = {
       'page': currentCategory!.pagination,
       'categoryId': currentCategory!.id,
-      'itemPerPage': itemsPerPage,
+      'itemsPerPage': itemsPerPage,
     };
 
     if (searchTitle.value.isNotEmpty) {
@@ -140,7 +140,7 @@ class HomeController extends GetxController {
       }
     }
 
-    HomeResult<ItemModel> result = await homeRepository.getAllProducts(body);
+    HomeResult<ItemModel> result = await homeRespository.getAllProducts(body);
 
     setLoading(false, isProduct: true);
 

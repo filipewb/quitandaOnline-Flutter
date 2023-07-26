@@ -5,14 +5,13 @@ import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 import 'package:greengrocer/src/pages/auth/view/components/forgot_password_dialog.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
+import 'package:greengrocer/src/pages/common_widgets/custom_text_field.dart';
 import 'package:greengrocer/src/pages_routes/app_pages.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 import 'package:greengrocer/src/services/validators.dart';
 
-import '../../common_widgets/custom_text_field.dart';
-
 class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key});
+  SignInScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -20,7 +19,7 @@ class SignInScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final utilsServices = UtilServices();
+  final utilsServices = UtilsServices();
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +37,13 @@ class SignInScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //Nome do app
+                    // Nome do app
                     const AppNameWidget(
                       greenTitleColor: Colors.white,
                       textSize: 40,
                     ),
 
-                    //Categorias
+                    // Categorias
                     SizedBox(
                       height: 30,
                       child: DefaultTextStyle(
@@ -68,6 +67,8 @@ class SignInScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // Formulário
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
@@ -101,7 +102,7 @@ class SignInScreen extends StatelessWidget {
                         validator: passwordValidator,
                       ),
 
-                      // Botao de entrar
+                      // Botão de entrar
                       SizedBox(
                         height: 50,
                         child: GetX<AuthController>(
@@ -116,15 +117,14 @@ class SignInScreen extends StatelessWidget {
                                   ? null
                                   : () {
                                       FocusScope.of(context).unfocus();
+
                                       if (_formKey.currentState!.validate()) {
                                         String email = emailController.text;
                                         String password =
                                             passwordController.text;
 
                                         authController.signIn(
-                                          email: email,
-                                          password: password,
-                                        );
+                                            email: email, password: password);
                                       }
                                     },
                               child: authController.isLoading.value
@@ -157,7 +157,7 @@ class SignInScreen extends StatelessWidget {
                             if (result ?? false) {
                               utilsServices.showToast(
                                 message:
-                                    'Um link de recuperação foi enviado para o seu e-mail.',
+                                    'Um link de recuperação foi enviado para seu email.',
                               );
                             }
                           },
@@ -195,7 +195,7 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ),
 
-                      // Botao de novo usuario
+                      // Botão de novo usuário
                       SizedBox(
                         height: 50,
                         child: OutlinedButton(
@@ -212,7 +212,7 @@ class SignInScreen extends StatelessWidget {
                             Get.toNamed(PagesRoutes.signUpRoute);
                           },
                           child: const Text(
-                            'Criar Conta',
+                            'Criar conta',
                             style: TextStyle(
                               fontSize: 18,
                             ),

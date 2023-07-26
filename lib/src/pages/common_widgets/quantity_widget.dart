@@ -8,12 +8,12 @@ class QuantityWidget extends StatelessWidget {
   final bool isRemovable;
 
   const QuantityWidget({
-    super.key,
+    Key? key,
     required this.suffixText,
     required this.value,
     required this.result,
     this.isRemovable = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +75,11 @@ class _QuantityButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _QuantityButton({
+    Key? key,
     required this.color,
-    required this.onPressed,
     required this.icon,
-  });
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

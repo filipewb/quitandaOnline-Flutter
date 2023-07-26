@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-abstract class HttpMethod {
+abstract class HttpMethods {
   static const String post = 'POST';
   static const String get = 'GET';
   static const String put = 'PUT';
@@ -20,8 +20,8 @@ class HttpManager {
       ..addAll({
         'content-type': 'application/json',
         'accept': 'application/json',
-        'X-Parse-Application-Id': 'wK7GcEjr2V4br5q5mlR1kybQ5dvxMFDX0qtE1d6Y',
-        'X-Parse-REST-API-Key': '2kahi62fkWePLWAwC7k8aMrtQkobogcgkruMxbeB',
+        'X-Parse-Application-Id': 'g1Oui3JqxnY4S1ykpQWHwEKGOe0dRYCPvPF4iykc',
+        'X-Parse-REST-API-Key': 'rFBKU8tk0m5ZlKES2CGieOaoYz6TgKxVMv8jRIsN',
       });
 
     Dio dio = Dio();
@@ -42,7 +42,7 @@ class HttpManager {
       // Retorno do erro do dio request
       return error.response?.data ?? {};
     } catch (error) {
-      // Retorno de map vazio generalizado
+      // Retorno de map vazio para error generalizado
       return {};
     }
   }

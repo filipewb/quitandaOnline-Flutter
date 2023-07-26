@@ -1,6 +1,6 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'item_model.dart';
+import 'package:greengrocer/src/models/item_model.dart';
 
 part 'cart_item_model.g.dart';
 

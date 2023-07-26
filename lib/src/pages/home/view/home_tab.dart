@@ -1,20 +1,19 @@
 import 'package:add_to_cart_animation/add_to_cart_animation.dart';
 import 'package:add_to_cart_animation/add_to_cart_icon.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/pages/base/controller/navigation_controller.dart';
+import 'package:greengrocer/src/pages/cart/controller/cart_controller.dart';
+import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 import 'package:greengrocer/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:greengrocer/src/pages/home/controller/home_controller.dart';
-import 'package:greengrocer/src/services/utils_services.dart';
-
-import '../../common_widgets/app_name_widget.dart';
-import 'components/category_tile.dart';
-import 'package:greengrocer/src/config/app_data.dart' as appData;
-
-import 'components/item_tile.dart';
+import 'package:greengrocer/src/pages/home/view/components/category_tile.dart';
+import 'package:greengrocer/src/pages/home/view/components/item_tile.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+  const HomeTab({Key? key}) : super(key: key);
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -24,6 +23,7 @@ class _HomeTabState extends State<HomeTab> {
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
 
   final searchController = TextEditingController();
+  final navigationController = Get.find<NavigationController>();
 
   late Function(GlobalKey) runAddToCardAnimation;
 
@@ -31,12 +31,10 @@ class _HomeTabState extends State<HomeTab> {
     runAddToCardAnimation(gkImage);
   }
 
-  final UtilServices utilServices = UtilServices();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar
+      // App bar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -48,25 +46,31 @@ class _HomeTabState extends State<HomeTab> {
               top: 15,
               right: 15,
             ),
-            child: GestureDetector(
-              onTap: () {},
-              child: Badge(
-                backgroundColor: CustomColors.customContrastColor,
-                label: const Text(
-                  '2',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return GestureDetector(
+                  onTap: () {
+                    navigationController.navigatePageView(NavigationTabs.cart);
+                  },
+                  child: Badge(
+                    badgeColor: CustomColors.customContrastColor,
+                    badgeContent: Text(
+                      controller.cartItems.length.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                    child: AddToCartIcon(
+                      key: globalKeyCartItems,
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: CustomColors.customSwatchColor,
+                      ),
+                    ),
                   ),
-                ),
-                child: AddToCartIcon(
-                  key: globalKeyCartItems,
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    color: CustomColors.customSwatchColor,
-                  ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
@@ -123,11 +127,12 @@ class _HomeTabState extends State<HomeTab> {
                             )
                           : null,
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(60),
-                          borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          )),
+                        borderRadius: BorderRadius.circular(60),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -143,9 +148,6 @@ class _HomeTabState extends State<HomeTab> {
                   child: !controller.isCategoryLoading
                       ? ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          itemCount: controller.allCategories.length,
-                          separatorBuilder: (_, index) =>
-                              const SizedBox(width: 10),
                           itemBuilder: (_, index) {
                             return CategoryTile(
                               onPressed: () {
@@ -157,14 +159,17 @@ class _HomeTabState extends State<HomeTab> {
                                   controller.currentCategory,
                             );
                           },
+                          separatorBuilder: (_, index) =>
+                              const SizedBox(width: 10),
+                          itemCount: controller.allCategories.length,
                         )
                       : ListView(
                           scrollDirection: Axis.horizontal,
                           children: List.generate(
                             10,
                             (index) => Container(
-                              margin: const EdgeInsets.only(right: 12),
                               alignment: Alignment.center,
+                              margin: const EdgeInsets.only(right: 12),
                               child: CustomShimmer(
                                 height: 20,
                                 width: 80,
@@ -185,17 +190,6 @@ class _HomeTabState extends State<HomeTab> {
                       ? Visibility(
                           visible: (controller.currentCategory?.items ?? [])
                               .isNotEmpty,
-                          replacement: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.search_off,
-                                size: 40,
-                                color: CustomColors.customSwatchColor,
-                              ),
-                              const Text('Não há itens para apresentar'),
-                            ],
-                          ),
                           child: GridView.builder(
                             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                             physics: const BouncingScrollPhysics(),
@@ -215,10 +209,21 @@ class _HomeTabState extends State<HomeTab> {
                               }
 
                               return ItemTile(
-                                item: controller.allProducts[index],
-                                cartAnimationMethod: itemSelectedCartAnimations,
-                              );
+                                  item: controller.allProducts[index],
+                                  cartAnimationMethod:
+                                      itemSelectedCartAnimations);
                             },
+                          ),
+                          replacement: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.search_off,
+                                size: 40,
+                                color: CustomColors.customSwatchColor,
+                              ),
+                              const Text('Não há itens para apresentar'),
+                            ],
                           ),
                         )
                       : GridView.count(

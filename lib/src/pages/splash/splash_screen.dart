@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +20,17 @@ class SplashScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: const Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: const [
             AppNameWidget(
               greenTitleColor: Colors.white,
               textSize: 40,
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(
-                Colors.white,
-              ),
-            ),
+              valueColor: AlwaysStoppedAnimation(Colors.white),
+            )
           ],
         ),
       ),

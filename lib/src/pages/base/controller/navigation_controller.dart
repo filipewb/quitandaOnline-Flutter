@@ -19,13 +19,13 @@ class NavigationController extends GetxController {
   void onInit() {
     super.onInit();
 
-    initNavigation(
+    _initNavigation(
       pageController: PageController(initialPage: NavigationTabs.home),
       currentIndex: NavigationTabs.home,
     );
   }
 
-  void initNavigation({
+  void _initNavigation({
     required PageController pageController,
     required int currentIndex,
   }) {

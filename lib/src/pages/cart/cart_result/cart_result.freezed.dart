@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'cart_result.dart';
 
@@ -24,8 +24,8 @@ mixin _$CartResult<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T data)? success,
-    TResult? Function(String message)? error,
+    TResult Function(T data)? success,
+    TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$CartResult<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult Function(Success<T> value)? success,
+    TResult Function(Error<T> value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,44 +60,41 @@ mixin _$CartResult<T> {
 abstract class $CartResultCopyWith<T, $Res> {
   factory $CartResultCopyWith(
           CartResult<T> value, $Res Function(CartResult<T>) then) =
-      _$CartResultCopyWithImpl<T, $Res, CartResult<T>>;
+      _$CartResultCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$CartResultCopyWithImpl<T, $Res, $Val extends CartResult<T>>
+class _$CartResultCopyWithImpl<T, $Res>
     implements $CartResultCopyWith<T, $Res> {
   _$CartResultCopyWithImpl(this._value, this._then);
 
+  final CartResult<T> _value;
   // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final $Res Function(CartResult<T>) _then;
 }
 
 /// @nodoc
-abstract class _$$SuccessCopyWith<T, $Res> {
-  factory _$$SuccessCopyWith(
-          _$Success<T> value, $Res Function(_$Success<T>) then) =
-      __$$SuccessCopyWithImpl<T, $Res>;
-  @useResult
+abstract class $SuccessCopyWith<T, $Res> {
+  factory $SuccessCopyWith(Success<T> value, $Res Function(Success<T>) then) =
+      _$SuccessCopyWithImpl<T, $Res>;
   $Res call({T data});
 }
 
 /// @nodoc
-class __$$SuccessCopyWithImpl<T, $Res>
-    extends _$CartResultCopyWithImpl<T, $Res, _$Success<T>>
-    implements _$$SuccessCopyWith<T, $Res> {
-  __$$SuccessCopyWithImpl(
-      _$Success<T> _value, $Res Function(_$Success<T>) _then)
-      : super(_value, _then);
+class _$SuccessCopyWithImpl<T, $Res> extends _$CartResultCopyWithImpl<T, $Res>
+    implements $SuccessCopyWith<T, $Res> {
+  _$SuccessCopyWithImpl(Success<T> _value, $Res Function(Success<T>) _then)
+      : super(_value, (v) => _then(v as Success<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  Success<T> get _value => super._value as Success<T>;
+
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$Success<T>(
-      freezed == data
+    return _then(Success<T>(
+      data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
@@ -122,7 +119,7 @@ class _$Success<T> implements Success<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Success<T> &&
+            other is Success<T> &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
@@ -132,9 +129,8 @@ class _$Success<T> implements Success<T> {
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SuccessCopyWith<T, _$Success<T>> get copyWith =>
-      __$$SuccessCopyWithImpl<T, _$Success<T>>(this, _$identity);
+  $SuccessCopyWith<T, Success<T>> get copyWith =>
+      _$SuccessCopyWithImpl<T, Success<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -148,8 +144,8 @@ class _$Success<T> implements Success<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T data)? success,
-    TResult? Function(String message)? error,
+    TResult Function(T data)? success,
+    TResult Function(String message)? error,
   }) {
     return success?.call(data);
   }
@@ -179,8 +175,8 @@ class _$Success<T> implements Success<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult Function(Success<T> value)? success,
+    TResult Function(Error<T> value)? error,
   }) {
     return success?.call(this);
   }
@@ -202,34 +198,34 @@ class _$Success<T> implements Success<T> {
 abstract class Success<T> implements CartResult<T> {
   factory Success(final T data) = _$Success<T>;
 
-  T get data;
+  T get data => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$SuccessCopyWith<T, _$Success<T>> get copyWith =>
+  $SuccessCopyWith<T, Success<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<T, $Res> {
-  factory _$$ErrorCopyWith(_$Error<T> value, $Res Function(_$Error<T>) then) =
-      __$$ErrorCopyWithImpl<T, $Res>;
-  @useResult
+abstract class $ErrorCopyWith<T, $Res> {
+  factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) then) =
+      _$ErrorCopyWithImpl<T, $Res>;
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<T, $Res>
-    extends _$CartResultCopyWithImpl<T, $Res, _$Error<T>>
-    implements _$$ErrorCopyWith<T, $Res> {
-  __$$ErrorCopyWithImpl(_$Error<T> _value, $Res Function(_$Error<T>) _then)
-      : super(_value, _then);
+class _$ErrorCopyWithImpl<T, $Res> extends _$CartResultCopyWithImpl<T, $Res>
+    implements $ErrorCopyWith<T, $Res> {
+  _$ErrorCopyWithImpl(Error<T> _value, $Res Function(Error<T>) _then)
+      : super(_value, (v) => _then(v as Error<T>));
 
-  @pragma('vm:prefer-inline')
+  @override
+  Error<T> get _value => super._value as Error<T>;
+
   @override
   $Res call({
-    Object? message = null,
+    Object? message = freezed,
   }) {
-    return _then(_$Error<T>(
-      null == message
+    return _then(Error<T>(
+      message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -254,18 +250,18 @@ class _$Error<T> implements Error<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error<T> &&
-            (identical(other.message, message) || other.message == message));
+            other is Error<T> &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
-      __$$ErrorCopyWithImpl<T, _$Error<T>>(this, _$identity);
+  $ErrorCopyWith<T, Error<T>> get copyWith =>
+      _$ErrorCopyWithImpl<T, Error<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -279,8 +275,8 @@ class _$Error<T> implements Error<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(T data)? success,
-    TResult? Function(String message)? error,
+    TResult Function(T data)? success,
+    TResult Function(String message)? error,
   }) {
     return error?.call(message);
   }
@@ -310,8 +306,8 @@ class _$Error<T> implements Error<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult Function(Success<T> value)? success,
+    TResult Function(Error<T> value)? error,
   }) {
     return error?.call(this);
   }
@@ -333,8 +329,8 @@ class _$Error<T> implements Error<T> {
 abstract class Error<T> implements CartResult<T> {
   factory Error(final String message) = _$Error<T>;
 
-  String get message;
+  String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
+  $ErrorCopyWith<T, Error<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
